@@ -5,17 +5,27 @@ import PackageDescription
 
 let package = Package(
     name: "OnboardingKit",
+    platforms: [
+        .macOS(.v11)
+    ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "OnboardingKit",
             targets: ["OnboardingKit"]),
     ],
+    dependencies: [
+        // Dependencies declare other packages that this package depends on.
+        .package(url: "https://github.com/sindresorhus/Defaults.git", branch: "main"),
+    ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "OnboardingKit"),
+            name: "OnboardingKit",
+            dependencies: [
+                .product(name: "Defaults", package: "Defaults")
+            ]),
         .testTarget(
             name: "OnboardingKitTests",
             dependencies: ["OnboardingKit"]),
